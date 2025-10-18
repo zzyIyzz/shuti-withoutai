@@ -1924,5 +1924,34 @@
     ],
     "difficulty": 1.5,
     "review_history": []
+  },
+  "7621952544766540452": {
+    "question": {
+      "id": 2124,
+      "question": "两组蓄电池组供电方式的变电站不包括(____)。",
+      "answer": "A",
+      "options": {
+        "A": "110kV及以上电压等级变电站",
+        "B": "枢纽变电站",
+        "C": "重要的 220kV变电站",
+        "D": "330kV及以上电压等级变电站"
+      },
+      "type": "多选题",
+      "explanation": "电气二次类"
+    },
+    "tiku_name": "新员工一级竞赛题库",
+    "user_answer": "",
+    "correct_answer": "A",
+    "error_reason": "用户主动查看答案",
+    "first_wrong_time": "2025-10-19T00:45:08.339950",
+    "last_wrong_time": "2025-10-19T00:45:08.339950",
+    "wrong_count": 1,
+    "review_count": 0,
+    "mastery_level": 0,
+    "tags": [
+      "题型_多选题"
+    ],
+    "difficulty": 2,
+    "review_history": []
   }
 }

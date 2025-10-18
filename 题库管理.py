@@ -10,6 +10,7 @@ import json
 import openpyxl
 from pathlib import Path
 import pandas as pd
+from PDF题库解析 import PDFTikuParser
 
 class TikuManager:
     def __init__(self):
@@ -249,14 +250,31 @@ class TikuManager:
             return []
     
     def parse_pdf(self, pdf_file):
-        """解析PDF题库（简化版）"""
+        """解析PDF题库"""
         try:
             print(f"正在解析PDF题库: {pdf_file.name}")
-            print("⚠️ PDF解析功能暂不可用，请将PDF转换为Excel格式")
-            print("建议: 使用PDF转换工具将内容转换为Excel格式")
-            return []
+            
+            # 使用PDF解析器
+            parser = PDFTikuParser(str(pdf_file))
+            questions = parser.parse()
+            
+            if questions:
+                print(f"成功加载 {len(questions)} 道题目")
+                
+                # 对每个题目进行题型识别
+                for question in questions:
+                    question['type'] = self.detect_question_type(question)
+                
+                return questions
+            else:
+                print("未能从PDF文档中解析到题目")
+                print("提示: PDF格式复杂，建议使用Excel格式或手动整理")
+                return []
+                
         except Exception as e:
             print(f"解析PDF文件失败: {e}")
+            print("提示: 请确保已安装 pdfplumber 或 PyPDF2 库")
+            print("运行: pip install pdfplumber")
             return []
     
     def identify_columns(self, headers):
