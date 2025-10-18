@@ -16,7 +16,7 @@ class 启动器:
     
     def __init__(self):
         self.base_dir = Path(__file__).parent
-        self.依赖列表 = ['openpyxl', 'python-docx', 'pdfplumber']
+        self.依赖列表 = ['openpyxl', 'python-docx', 'pdfplumber', 'PyPDF2']
     
     def 清屏(self):
         """清屏"""
@@ -120,6 +120,7 @@ class 启动器:
             print("  4. 题库管理")
             print("  5. Word转Excel")
             print("  6. PDF转Excel")
+            print("  9. 题库转换管理器")
             print()
             
             print("【系统设置】")
@@ -144,6 +145,8 @@ class 启动器:
                 self.Word转Excel()
             elif 选择 == '6':
                 self.PDF转Excel()
+            elif 选择 == '9':
+                self.题库转换管理器()
             elif 选择 == '7':
                 self.管理依赖()
             elif 选择 == '8':
@@ -495,6 +498,91 @@ class 启动器:
             print("请先安装依赖（选择菜单中的'安装/检查依赖'）")
             input("\n按回车键返回...")
             return False
+    
+    def 题库转换管理器(self):
+        """题库转换管理器"""
+        try:
+            from 题库转换管理器 import TikuConverterManager
+            
+            self.清屏()
+            self.显示标题("题库转换管理器")
+            
+            converter = TikuConverterManager()
+            
+            while True:
+                print("【转换功能】")
+                print("  1. 查看可转换文件")
+                print("  2. 批量转换为Excel")
+                print("  3. 转换状态统计")
+                print("  4. 返回主菜单")
+                print()
+                
+                选择 = input("请选择功能: ").strip()
+                
+                if 选择 == '1':
+                    self.清屏()
+                    self.显示标题("可转换文件列表")
+                    files = converter.get_convertible_files()
+                    
+                    if not files:
+                        print("📁 题库文件夹中没有找到可转换的文件")
+                    else:
+                        print(f"📋 找到 {len(files)} 个文件:")
+                        for i, file_info in enumerate(files, 1):
+                            size_mb = file_info['size'] / 1024 / 1024
+                            print(f"  {i}. {file_info['name']} ({file_info['format']}, {size_mb:.1f}MB)")
+                    
+                    input("\n按回车键继续...")
+                
+                elif 选择 == '2':
+                    self.清屏()
+                    self.显示标题("批量转换")
+                    
+                    print("🔄 开始批量转换为Excel格式...")
+                    results = converter.batch_convert('excel')
+                    
+                    print(f"\n📊 转换结果:")
+                    print(f"  成功: {results['success']} 个")
+                    print(f"  失败: {results['failed']} 个")
+                    print(f"  跳过: {results['skipped']} 个")
+                    
+                    if results['details']:
+                        print(f"\n📋 详细信息:")
+                        for detail in results['details']:
+                            status_icon = "✅" if detail['status'] == 'success' else "❌" if detail['status'] == 'failed' else "⏭️"
+                            print(f"  {status_icon} {detail['file']}")
+                            if 'reason' in detail:
+                                print(f"     原因: {detail['reason']}")
+                    
+                    input("\n按回车键继续...")
+                
+                elif 选择 == '3':
+                    self.清屏()
+                    self.显示标题("转换状态统计")
+                    
+                    status = converter.get_conversion_status()
+                    print(f"📊 文件统计:")
+                    print(f"  总文件数: {status['total_files']}")
+                    print(f"  可转换文件: {status['convertible']}")
+                    print(f"  已是Excel格式: {status['already_excel']}")
+                    
+                    if status['formats']:
+                        print(f"\n📋 格式分布:")
+                        for format_type, count in status['formats'].items():
+                            print(f"  {format_type}: {count} 个")
+                    
+                    input("\n按回车键继续...")
+                
+                elif 选择 == '4':
+                    break
+                
+                else:
+                    print("❌ 无效选择，请重新输入")
+                    input("按回车键继续...")
+        
+        except Exception as e:
+            print(f"❌ 转换管理器启动失败: {e}")
+            input("按回车键继续...")
     
     def 运行(self):
         """启动系统"""

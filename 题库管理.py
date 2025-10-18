@@ -11,6 +11,7 @@ import openpyxl
 from pathlib import Path
 import pandas as pd
 from PDF题库解析 import PDFTikuParser
+from Word题库智能解析器 import Word题库智能解析器
 
 class TikuManager:
     def __init__(self):
@@ -239,14 +240,31 @@ class TikuManager:
             return []
     
     def parse_word(self, word_file):
-        """解析Word题库（简化版）"""
+        """解析Word题库"""
         try:
             print(f"正在解析Word题库: {word_file.name}")
-            print("⚠️ Word解析功能暂不可用，请将Word文档转换为Excel格式")
-            print("建议: 将Word文档内容复制到Excel中，按标准格式整理")
-            return []
+            
+            # 使用智能Word解析器
+            parser = Word题库智能解析器(str(word_file))
+            questions = parser.parse()
+            
+            if questions:
+                print(f"成功加载 {len(questions)} 道题目")
+                
+                # 对每个题目进行题型识别
+                for question in questions:
+                    question['type'] = self.detect_question_type(question)
+                
+                return questions
+            else:
+                print("未能从Word文档中解析到题目")
+                print("提示: 请确保Word文档格式正确，或使用转换工具")
+                return []
+                
         except Exception as e:
             print(f"解析Word文件失败: {e}")
+            print("提示: 请确保已安装 python-docx 库")
+            print("运行: pip install python-docx")
             return []
     
     def parse_pdf(self, pdf_file):
