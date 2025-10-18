@@ -1,0 +1,125 @@
+# 强规则库配置
+
+# 规则优先级（数字越小优先级越高）
+rule_priority:
+  true_false_answer: 1      # 判断题答案强规则
+  fill_blank_markers: 2     # 填空题标记强规则
+  multiple_choice_hints: 3  # 多选题提示强规则
+  single_choice_default: 4  # 单选题默认规则
+  subjective_fallback: 5    # 简答题兜底规则
+
+# 强规则定义
+rules:
+  # 规则1: 判断题答案识别
+  true_false_answer:
+    enabled: true
+    description: "答案为判断类型时强制识别为判断题"
+    conditions:
+      answer_in: ["对", "错", "√", "×", "True", "False", "T", "F", "正确", "错误", "是", "否"]
+    action:
+      type: "true_false"
+      confidence: 0.95
+      explanation: "强规则命中：答案为判断类型"
+  
+  # 规则2: 填空题标记识别
+  fill_blank_markers:
+    enabled: true
+    description: "题干含填空标记时识别为填空题"
+    conditions:
+      question_contains_blanks: true
+      min_blank_count: 1
+      answer_not_letter: true
+    action:
+      type: "fill_blank"
+      confidence: 0.90
+      explanation: "强规则命中：题干含填空标记"
+  
+  # 规则3: 多选题提示识别
+  multiple_choice_hints:
+    enabled: true
+    description: "题干含多选提示词时识别为多选题"
+    conditions:
+      question_keywords: ["多选", "多项", "至少两项", "两个以上", "不止一个", "哪些", "哪几个"]
+      has_options: true
+      min_options: 3
+    action:
+      type: "multiple_choice"
+      confidence: 0.88
+      explanation: "强规则命中：题干含多选提示"
+  
+  # 规则4: 单选题默认规则
+  single_choice_default:
+    enabled: true
+    description: "有选项且答案为单字母时默认为单选题"
+    conditions:
+      has_options: true
+      option_count_range: [2, 6]
+      answer_single_letter: true
+    action:
+      type: "single_choice"
+      confidence: 0.85
+      explanation: "强规则命中：标准单选题格式"
+  
+  # 规则5: 简答题兜底规则
+  subjective_fallback:
+    enabled: true
+    description: "无选项且答案为长文本时识别为简答题"
+    conditions:
+      has_options: false
+      answer_length_min: 15
+      question_keywords: ["简述", "说明", "论述", "分析", "如何", "为什么", "请"]
+    action:
+      type: "subjective"
+      confidence: 0.80
+      explanation: "强规则命中：简答题特征"
+
+# 冲突解决策略
+conflict_resolution:
+  # 当多个规则同时命中时的处理策略
+  strategy: "highest_priority"  # highest_priority | highest_confidence | weighted_average
+  
+  # 规则组合逻辑
+  combinations:
+    # 判断题 + 单选题冲突 -> 优先判断题
+    true_false_vs_single_choice:
+      winner: "true_false"
+      reason: "判断题特征更明确"
+    
+    # 多选题 + 单选题冲突 -> 检查答案长度
+    multiple_vs_single_choice:
+      condition: "answer_length > 1"
+      winner_if_true: "multiple_choice"
+      winner_if_false: "single_choice"
+
+# 规则验证配置
+validation:
+  # 规则命中率监控
+  hit_rate_monitoring:
+    enabled: true
+    min_hit_rate: 0.15  # 规则命中率低于15%时告警
+    max_hit_rate: 0.85  # 规则命中率高于85%时告警
+  
+  # 规则准确率监控
+  accuracy_monitoring:
+    enabled: true
+    min_accuracy: 0.90  # 规则准确率低于90%时告警
+
+# 特殊情况处理
+special_cases:
+  # OCR噪声处理
+  ocr_noise_handling:
+    enabled: true
+    confidence_threshold: 0.8
+    fallback_to_model: true
+  
+  # 版面异常处理
+  layout_anomaly_handling:
+    enabled: true
+    min_layout_score: 0.3
+    fallback_strategy: "conservative"  # conservative | aggressive | model_only
+
+# 调试配置
+debug:
+  log_rule_hits: true
+  log_conflicts: true
+  export_explanations: true

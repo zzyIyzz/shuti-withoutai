@@ -1,0 +1,63 @@
+# 全局配置文件
+app:
+  name: "题库自动识别系统"
+  version: "1.0.0"
+  
+# 阈值配置
+thresholds:
+  # 接受阈值（直接输出）
+  accept:
+    single_choice: 0.80
+    multiple_choice: 0.80
+    true_false: 0.80
+    fill_blank: 0.75
+    subjective: 0.75
+  
+  # 复核阈值（低于此值进入人工复核）
+  review:
+    single_choice: 0.55
+    multiple_choice: 0.55
+    true_false: 0.55
+    fill_blank: 0.50
+    subjective: 0.50
+  
+  # 最小确定度阈值
+  min_confidence: 0.40
+
+# 路径配置
+paths:
+  data_root: "data"
+  model_path: "src/model/xgb_model.json"
+  calibration_path: "calibration/calibration.json"
+  config_root: "configs"
+
+# OCR配置
+ocr:
+  enabled: false
+  engine: "paddleocr"
+  confidence_threshold: 0.8
+  use_gpu: false
+
+# 模型配置
+model:
+  type: "xgboost"
+  params:
+    max_depth: 6
+    n_estimators: 300
+    learning_rate: 0.08
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# 校准配置
+calibration:
+  method: "isotonic"
+  hot_reload: true
+  update_threshold_psi: 0.2
+  target_ece: 0.03
+
+# 监控配置
+monitoring:
+  enable_metrics: true
+  log_predictions: true
+  drift_detection: true

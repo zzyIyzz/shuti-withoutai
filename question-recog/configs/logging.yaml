@@ -1,0 +1,52 @@
+version: 1
+formatters:
+  default:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  json:
+    format: '{"timestamp": "%(asctime)s", "logger": "%(name)s", "level": "%(levelname)s", "message": "%(message)s", "module": "%(module)s", "function": "%(funcName)s", "line": %(lineno)d}'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: default
+    stream: ext://sys.stdout
+  
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: json
+    filename: logs/app.log
+    encoding: utf8
+  
+  error_file:
+    class: logging.FileHandler
+    level: ERROR
+    formatter: json
+    filename: logs/error.log
+    encoding: utf8
+
+loggers:
+  question_recog:
+    level: DEBUG
+    handlers: [console, file, error_file]
+    propagate: no
+  
+  question_recog.parsing:
+    level: DEBUG
+    handlers: [file]
+    propagate: yes
+  
+  question_recog.rules:
+    level: INFO
+    handlers: [console, file]
+    propagate: yes
+  
+  question_recog.model:
+    level: INFO
+    handlers: [console, file]
+    propagate: yes
+
+root:
+  level: WARNING
+  handlers: [console]
