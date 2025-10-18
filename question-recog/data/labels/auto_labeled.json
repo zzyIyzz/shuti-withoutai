@@ -1,0 +1,402 @@
+[
+  {
+    "source_id": "file://..\\题库\\1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011).xlsx#q1",
+    "question": "工作表: 题库 1 运用中的电气设备是指：____或____及____的电气设备。 全部带有电压、一部分带有电压、一经操作即带有 电压 填空题 2 低压是指用于配电的交流系统中____的电压等级,高压通常指超过低电 压的电压等级；特定情况下,指电力系统中输电的电压等级。 1000V 及其以下 填空题 3 交流系统中一个电气连接部分，是指可用____同其他电气装置分开的部分. 隔离开关 填空题 4 ",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "4️⃣ 填空题",
+    "final_type": "4"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q47",
+    "question": "几个班同时进行工作时，总工作票的工作班成员栏内，只填明各分工作票的负责人，不必填写全部工作人员姓名。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "❓ 需要仔细判断",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q103",
+    "question": "填写操作票应使用设备的双重名称名称和编号。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "❓ 需要仔细判断",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q138",
+    "question": "如果油的色谱分析结果表明，总烃含量没有明显变化，乙炔增加很快，氢气含量也较高，说明存在的缺陷是 火花放电 。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "5️⃣ 简答题",
+    "final_type": "5"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q171",
+    "question": "操作票要由操作人填写。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "❓ 需要仔细判断",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q174",
+    "question": "工作票应由工作负责人填写，也可由工作票签发人填写。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "❓ 需要仔细判断",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q197",
+    "question": "对于采用不对应接线的断路器控制回路，控制手柄在“跳闸后”位置而红灯闪光，这说明断路器在合闸位置。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "5️⃣ 简答题",
+    "final_type": "5"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q343",
+    "question": "风机质保期内的定期检查工作，特别是3个月、6个月、12个月检验周期根据风机厂家技术说明等定期检验，应加强对螺栓力矩和塔筒探伤的检查；每次定期检验项目必须包括有关安全回路的测试和各塔筒连接部件的检查。",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "5️⃣ 简答题",
+    "final_type": "5"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q484",
+    "question": "电压互感器低压侧一相电压为零、两相不变，线电压两个降低、一个不变，说明(B)。 A、低压侧两相熔断器断B、低压侧一相熔丝断 C、高压侧一相熔丝断 D、高压侧两相熔丝断",
+    "options_count": 0,
+    "answer": "",
+    "suggested_type": "5️⃣ 简答题",
+    "final_type": "5"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q511",
+    "question": "交流电流表和电压表测量值是指的（C）。 A、最大值 B、平均值 C、有效值 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q512",
+    "question": "金属导体的电阻值随温度的升高而（A）。 A、增大 B、不变 C、减小 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q513",
+    "question": "产生串联谐振的条件是（B）。 A、XL<XC B、XL=XC C、XL>XC D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q514",
+    "question": "电容器中储存的能量是（C）。 A、磁场能 B、热能 C、电场能 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q515",
+    "question": "三相变压器容量的计算公式是（A）。 A、S=UI B、S=UI C、UIcosф D.以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q516",
+    "question": "空载高压长线路的末端电压（C）线路始端电压。 A、低于 B、等于 C、高于 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q519",
+    "question": "变压器的短路损耗叫（C）。 A、铁损 B、漏磁损耗 C、铜损 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q520",
+    "question": "不按工作票要求布置安全措施，工作负责人应负哪一种责任？（A） A、主要责任 B、次要责任 C、直接责任 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q530",
+    "question": "变压器油温表测量的温度是指（C）。 A、绕组温度 B、铁芯温度 C、上层油的平均温度 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q531",
+    "question": "接地装置指的是（C）。 A、接地体 B、接地引下线 C、接地引下线和接地体的总和 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q532",
+    "question": "测量绕组的直流电阻的目的是（C）。 A、保证设备的温升不超过上限 B、测量绝缘是否受潮 C、判断绕组是否断股或接头接触不良 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q533",
+    "question": "操作中有可能产生较高过电压的是（B）。 A、投入空载变压器 B、切断空载带电长线路 C、投入补偿电容器 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q534",
+    "question": "小电流接地系统发生单相接地时中性点对地电压上升为相电压。非接地两相对地电压为（C）。 A、相电压 B、电压下降 C、线电压 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q535",
+    "question": "加速绝缘材料老化的主要原因是长期过高的（B）。 A、电压 B、温度 C、湿度 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q536",
+    "question": "油断路器内的变压器油的作用（C）。 A、绝缘和防锈 B、绝缘和散热 C、绝缘和灭弧 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q537",
+    "question": "用有载调压装置调压时,对系统来说（B）。 A、可提高功率因数 B、不能补偿系统无功的不足 C、起不了多大作用 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q538",
+    "question": "断路器液压机构中的压力表指示的是（B）。 A、氮气压力 B、液体压力 C、空气压力 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q539",
+    "question": "中性点经消弧线圈接地系统称为（B）。 A、大电流接地系统 B、小电流接地系统 C、不接地系统 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q540",
+    "question": "在变压器中性点装设消弧线圈的目的是(C)。 A、提高电网电压水平 B、限制变压器故障电流 C、补尝电网接地时的电容电流 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q543",
+    "question": "变压站母线上安装避雷器中为了防止（B）。 A、直击雷 B、雷电进行波 C、反击 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q544",
+    "question": "用手触摸变压器外壳时，如有麻电感，可能是（C）。 A、线路接地引起 B.过负荷引起 C、外壳接触不良 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q545",
+    "question": "手车式断路器隔离插头检修后，其接触面（A）。 A、应涂导电膏 B、应涂润滑油 C、不涂任何油质 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q546",
+    "question": "发现断路器严重漏油时，应（B）。 A、立即退出重合闸装置 B、立即断开断路器 C、采取禁止跳闸措施 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q547",
+    "question": "真空断路器灭弧室的玻璃外壳起（A）作用。 A、真空密封 B、绝缘 C、灭弧 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q548",
+    "question": "万用表不用时应把旋扭放在（C）。 A、直流档 B、电阻档 C、交流电压档 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q549",
+    "question": "变压器绝缘吸收比是（C）。 A、R15 B、R60 C、R15/R60 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q550",
+    "question": "断路只有在（B）情况下才能进行慢分慢合操作。 A、运行 B、检修 C、备用 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q560",
+    "question": "中性点不接地系统发生单相接地时应(C)。 A、立即跳闸 B、带时限跳闸 C、动作于发出信号 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q572",
+    "question": "Y/△-11接线的变压器，二次侧线电压超前一次侧线电压的角度差是(B)。 A、330° B、30° C、300° D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q574",
+    "question": "强油循环,风冷变压器上层油温不宜超过(A)。 A、75℃ B、85℃ C、95℃ D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q579",
+    "question": "10kV及至5kV电压互感器的高压熔断器应选用（C）安培。 A、1 B、2.5 C、0.5 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q630",
+    "question": "变电站的直流电源是独立的，其主要用于(B)。 A、信号回路及事故照明 B、控制回路和自动装置及信号回路 C、合闸和跳闸回路 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q631",
+    "question": "造成运行中的铅酸蓄电池负极板硫化的原因是(C)。 A、过充电 B、过放电 C、欠充电 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q632",
+    "question": "中性点不接地系统发生单相接地时应(C)。 A、立即跳闸 B、带时限跳 C、动作于发出信号 D以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q633",
+    "question": "电力系统的稳定性干扰最严重的是(A)。 A、发生三相短路 B、系统内发生严重两相接地短路 C、投、切大型空载变压器 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q634",
+    "question": "高压断路器额定开断电流是指断路器的(C)。 A、最大负荷电流 B、故障点三相短路最大瞬时电流 C、故障点三相短路电流最大有效值 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q635",
+    "question": "距离保护是指利用(B)。 A、电压元件元件来反应短路故障的保护装置 B、阻抗元件来反应短路故障的保护装置 C、电流元件元件来反应短路故障的保护装置 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q636",
+    "question": "距离保护Ⅰ段能保护线路全长的(B)。 A、100% B、80%～85% C、40%～50% D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q637",
+    "question": "零序电流保护的特点只是反应(A)。 A、单相接地故障 B、相间短路故障 C、三相短路故障 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q638",
+    "question": "电流速断保护的动作电流是按被保护线路(A)。 A、未端短路时，流过保护的最大短路电流整定的 B、首端短路时，流过保护的最大短路电流整定的 C、任意处短路时，流过保护的最大短路电流整定的 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  },
+  {
+    "source_id": "file://..\\题库\\附件：安徽分公司电力生产培训题库(1).docx#q639",
+    "question": "过流保护加装低电压闭锁是为了提高保护装置在发生短路故障时的(C)。 A、快速切除故障能力的要求 B、动作可靠性的要求 C、灵敏度的要求 D、以上都不",
+    "options_count": 0,
+    "answer": "对",
+    "suggested_type": "3️⃣ 判断题",
+    "final_type": "3"
+  }
+]

@@ -1,8 +1,13 @@
-# Python
+# Python缓存文件
 __pycache__/
 *.py[cod]
 *$py.class
+
+# 编译文件
 *.so
+*.dll
+
+# 分发/打包
 .Python
 build/
 develop-eggs/
@@ -25,11 +30,7 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
+# 单元测试/覆盖率报告
 htmlcov/
 .tox/
 .coverage
@@ -47,13 +48,7 @@ coverage.xml
 # pyenv
 .python-version
 
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# 环境变量
 .env
 .venv
 env/
@@ -62,27 +57,14 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-
-# IDEs
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# 操作系统
 .DS_Store
 .DS_Store?
 ._*
@@ -91,26 +73,13 @@ venv.bak/
 ehthumbs.db
 Thumbs.db
 
-# 项目特定
-题库/
-.data/
-.config/
-*.xlsx
-*.docx
-*.pdf
-*.json
-!requirements.txt
-!README.md
-!**/README.md
-
-# 保留重要配置文件
-!question-recog/configs/
-!question-recog/data/labels/README.md
-!question-recog/data/*/README.md
+# 日志文件
+*.log
 
 # 临时文件
-temp/
-tmp/
 *.tmp
 *.bak
-*.log
+temp/
+tmp/
+
+# 注意：不再忽略题库文件、配置文件、JSON文件等，确保所有项目文件都被包含
