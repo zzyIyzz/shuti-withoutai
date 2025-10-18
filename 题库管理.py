@@ -409,18 +409,29 @@ class TikuManager:
             return 选项内容
     
     def detect_question_type(self, question):
-        """自动检测题型 - 使用智能识别引擎"""
+        """自动检测题型 - 使用高精度识别引擎"""
         try:
-            from 智能题型识别 import detect_question_type
-            return detect_question_type(
+            # 优先使用修复后的高精度识别
+            from 高精度题型识别 import detect_question_type_fixed
+            return detect_question_type_fixed(
                 question['question'],
                 question['answer'],
                 question.get('options')
             )
         except Exception as e:
-            print(f"智能识别失败，使用备用方法: {e}")
-            # 备用识别方法
-            return self._fallback_detect(question)
+            print(f"高精度识别失败，使用智能识别: {e}")
+            try:
+                # 备用方案1: 使用原有智能识别
+                from 智能题型识别 import detect_question_type
+                return detect_question_type(
+                    question['question'],
+                    question['answer'],
+                    question.get('options')
+                )
+            except Exception as e2:
+                print(f"智能识别失败，使用备用方法: {e2}")
+                # 备用方案2: 使用内置识别方法
+                return self._fallback_detect(question)
     
     def _fallback_detect(self, question):
         """备用题型识别方法 - 详细完备版"""

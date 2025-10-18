@@ -10981,3 +10981,17 @@
 2025-10-18 22:58:16,677 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 100.0%, 耗时: 0.000s
 2025-10-18 22:58:16,677 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.000s
 2025-10-18 22:58:16,678 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.000s
+2025-10-18 23:16:15,409 - QuestionTypeRecognition - INFO - 配置文件加载成功
+2025-10-18 23:16:15,410 - QuestionTypeRecognition - INFO - 确定度配置管理器初始化完成
+2025-10-18 23:16:15,411 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.001s
+2025-10-18 23:16:35,533 - QuestionTypeRecognition - INFO - 配置文件加载成功
+2025-10-18 23:16:35,534 - QuestionTypeRecognition - INFO - 确定度配置管理器初始化完成
+2025-10-18 23:16:35,534 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.001s
+2025-10-18 23:17:08,763 - QuestionTypeRecognition - INFO - 配置文件加载成功
+2025-10-18 23:17:08,764 - QuestionTypeRecognition - INFO - 确定度配置管理器初始化完成
+2025-10-18 23:17:08,765 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.001s
+2025-10-18 23:17:08,768 - QuestionTypeRecognition - INFO - 识别完成: 多选题, 确定度: 100.0%, 耗时: 0.000s
+2025-10-18 23:17:08,771 - QuestionTypeRecognition - INFO - 识别完成: 简答题, 确定度: 90.0%, 耗时: 0.000s
+2025-10-18 23:17:08,773 - QuestionTypeRecognition - INFO - 识别完成: 单选题, 确定度: 80.0%, 耗时: 0.000s
+2025-10-18 23:17:08,775 - QuestionTypeRecognition - INFO - 识别完成: 多选题, 确定度: 100.0%, 耗时: 0.000s
+2025-10-18 23:17:08,776 - QuestionTypeRecognition - INFO - 识别完成: 简答题, 确定度: 90.0%, 耗时: 0.000s
