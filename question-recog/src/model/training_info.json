@@ -1,18 +1,26 @@
 {
-  "model_type": "XGBoost",
-  "training_samples": 272,
-  "test_samples": 68,
-  "features": 120,
+  "model_type": "xgboost",
+  "training_samples": 219,
+  "test_samples": 94,
+  "f1_macro": 0.9879551820728292,
+  "f1_weighted": 0.9893140234817331,
+  "feature_count": 19,
   "classes": [
     "fill_blank",
     "multiple_choice",
     "single_choice",
-    "subjective",
     "true_false"
   ],
-  "f1_macro": 1.0,
-  "f1_weighted": 1.0,
-  "training_date": "2025-01-12",
-  "data_source": "expanded_mock_data",
-  "note": "使用模拟特征的快速训练版本"
+  "feature_importance": {
+    "answer_is_single_letter": 0.278645396232605,
+    "answer_is_multi_letters": 0.23096661269664764,
+    "answer_pattern_id": 0.16590818762779236,
+    "has_options": 0.12149883061647415,
+    "answer_len": 0.07385919243097305,
+    "num_options": 0.07248447835445404,
+    "option_len_mean": 0.021155839785933495,
+    "hint_keywords_subj": 0.01558997854590416,
+    "blank_underline_count": 0.009763740003108978,
+    "question_len": 0.005874652415513992
+  }
 }

@@ -24,24 +24,35 @@ def prepare_training_data():
     """准备训练数据"""
     print("🔄 准备训练数据...")
     
-    # 检查标注文件 - 优先使用扩展数据
+    # 检查标注文件 - 优先使用最全面的数据
+    auto_file = Path("data/labels/auto_annotations.jsonl")
+    merged_file = Path("data/labels/manual_labels_merged.jsonl")
     expanded_file = Path("data/labels/expanded_labels.jsonl")
     labels_file = Path("data/labels/manual_labels.jsonl")
     
-    if expanded_file.exists():
+    # 优先级：自动标注 > 合并标注 > 扩展标注 > 手动标注 (自动标注ID匹配)
+    if auto_file.exists():
+        labels_file = auto_file
+        print(f"✅ 使用自动标注数据集: {labels_file}")
+    elif merged_file.exists():
+        labels_file = merged_file
+        print(f"✅ 使用合并标注数据集: {labels_file}")
+    elif expanded_file.exists():
         labels_file = expanded_file
         print(f"✅ 使用扩展数据集: {labels_file}")
     elif labels_file.exists():
         print(f"✅ 使用手动标注数据: {labels_file}")
     else:
-        print("❌ 未找到标注文件，请先运行 expand_data.py 或 annotation_tool.py")
+        print("❌ 未找到标注文件，请先运行标注工具")
         return None, None, None
     
     # 检查生产结果文件
-    results_file = Path("production_results.json")
+    results_file = Path("fixed_results.json")
     if not results_file.exists():
-        print("❌ 生产结果文件不存在，请先运行 production_test.py")
-        return None, None, None
+        results_file = Path("production_results.json")
+        if not results_file.exists():
+            print("❌ 生产结果文件不存在，请先运行 main.py 或 production_test.py")
+            return None, None, None
     
     # 加载标注数据
     labels = {}
@@ -55,7 +66,14 @@ def prepare_training_data():
     with open(results_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    results = data["results"]
+    # 处理不同的数据格式
+    if isinstance(data, list):
+        results = data
+    elif "results" in data:
+        results = data["results"]
+    else:
+        print("❌ 无法识别的数据格式")
+        return None, None, None
     
     # 创建特征提取器
     extractor = FeatureExtractor()
@@ -72,10 +90,17 @@ def prepare_training_data():
         if source_id in labels:
             # 有标注的样本
             gold_type = labels[source_id]
-            features = result["features"]
+            
+            # 动态提取特征
+            question = ParsedQuestion(
+                question=result["question"],
+                options=result.get("options", []),
+                answer_raw=result.get("answer_raw", "")
+            )
+            features = extractor.extract_features(question)
             
             # 转换为特征向量
-            feature_vector = [features[name] for name in feature_names]
+            feature_vector = [getattr(features, name) for name in feature_names]
             X.append(feature_vector)
             y.append(gold_type)
             labeled_count += 1

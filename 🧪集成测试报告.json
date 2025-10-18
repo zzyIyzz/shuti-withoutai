@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-10-19 00:42:28",
+  "total_tests": 8,
+  "passed_tests": 8,
+  "success_rate": 1.0,
+  "total_time": 1.4556474685668945,
+  "test_results": {
+    "🔧 核心组件测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "🎯 双系统识别测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "📚 题库管理测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "🎨 GUI界面测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "📊 数据处理测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "🔄 系统集成测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "⚡ 性能压力测试": {
+      "status": "PASS",
+      "details": true
+    },
+    "🛡️ 错误处理测试": {
+      "status": "PASS",
+      "details": true
+    }
+  },
+  "system_health": "🟢 优秀"
+}

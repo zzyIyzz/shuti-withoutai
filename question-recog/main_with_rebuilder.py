@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-题库识别系统 - 增强版本 (100%识别率)
-正确解析Excel的列结构，识别选择题，消除unknown类型
+题库识别系统 - 集成智能重构器版本
+先重构题目，再进行100%识别
 """
 
 import json
@@ -11,6 +11,9 @@ import pandas as pd
 import re
 from typing import List, Dict, Any
 import sys
+
+# 导入重构器
+from 智能题目重构器 import QuestionRebuilder
 
 def enhanced_question_classifier(question: str, options: List[str], answer: str, excel_type: str = None) -> tuple:
     """增强版题目分类器，返回(类型, 置信度) - 支持100%识别率，消除unknown"""
@@ -27,7 +30,7 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
             return 'single_choice', 0.95
         elif excel_type == "多选题":
             return 'multiple_choice', 0.95
-        elif excel_type == "填空题" and not options:  # 只有真正无选项才是填空题
+        elif excel_type == "填空题" and not options:
             return 'fill_blank', 0.95
     
     # 1. 有选项的情况 - 优先识别为选择题
@@ -56,9 +59,7 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
     # 判断题题干模式
     true_false_patterns = [
         r'是否正确', r'正确吗', r'对吗', r'错吗', r'是对的吗', r'是错的吗',
-        r'判断.*正确', r'下列.*正确', r'说法.*正确', r'表述.*正确',
-        r'(对|错|√|×|正确|错误|是|否)$',
-        r'[（(](对|错|√|×)[)）]$'
+        r'判断.*正确', r'下列.*正确', r'说法.*正确', r'表述.*正确'
     ]
     
     for pattern in true_false_patterns:
@@ -71,23 +72,20 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
         if re.search(pattern, question):
             return 'fill_blank', 0.9
     
-    # 增强填空题识别 - 单位说明
+    # 增强填空题识别
     unit_patterns = [r'单位[：:]\s*\w+', r'\(\s*单位\s*[：:]\s*\w+\s*\)', r'（\s*单位\s*[：:]\s*\w+\s*）']
     for pattern in unit_patterns:
         if re.search(pattern, question):
             return 'fill_blank', 0.85
     
-    # 增强填空题识别 - 冒号结尾
     if re.search(r'[：:]\s*$', question):
         return 'fill_blank', 0.80
     
-    # 增强填空题识别 - 疑问词
     question_words = [r'多少', r'几个', r'几种', r'几类', r'多长', r'多大', r'多高', r'多重']
     for word in question_words:
         if re.search(word, question):
             return 'fill_blank', 0.75
     
-    # 增强填空题识别 - 技术参数
     if re.search(r'\d+', answer):
         tech_patterns = [r'电阻', r'电压', r'电流', r'功率', r'频率', r'温度', r'压力', r'距离', r'时间', r'速度']
         for pattern in tech_patterns:
@@ -97,9 +95,7 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
     # 4. 主观题识别
     subjective_patterns = [
         r'简述', r'论述', r'分析', r'说明', r'阐述', r'解释',
-        r'如何', r'怎样', r'为什么', r'原因', r'措施', r'方法',
-        r'^(简述|说明|论述|分析|阐述|解释|描述)',
-        r'(请|试|谈谈)'
+        r'如何', r'怎样', r'为什么', r'原因', r'措施', r'方法'
     ]
     
     for pattern in subjective_patterns:
@@ -109,15 +105,13 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
     if not options and len(answer) > 20:
         return 'subjective', 0.7
     
-    # 5. 增强的兜底策略 - 防止unknown（关键改进）
+    # 5. 增强的兜底策略 - 防止unknown
     if options and len(options) >= 1:
-        # 有选项但只有1个选项的情况
         if len(answer) == 1 and answer.upper() in 'ABCDEFGHIJ':
             return 'single_choice', 0.70
         elif len(answer) > 1 and all(c.upper() in 'ABCDEFGHIJ' for c in answer):
             return 'multiple_choice', 0.70
         else:
-            # 有选项但答案格式不标准，默认单选题
             return 'single_choice', 0.60
     
     # 无选项的兜底策略
@@ -127,147 +121,58 @@ def enhanced_question_classifier(question: str, options: List[str], answer: str,
         else:
             return 'subjective', 0.50
     
-    # 最后的兜底策略 - 确保不会返回unknown
+    # 最后的兜底策略
     return 'single_choice', 0.40
 
-def parse_excel_file_structured(file_path: str) -> List[Dict[str, Any]]:
-    """解析结构化Excel文件（有列名的）"""
-    questions = []
+def process_rebuilt_questions(rebuilt_file: str, output_file: str = "final_rebuilt_results.json"):
+    """处理重构后的题目"""
+    print("🚀 处理重构后的题目")
+    print("=" * 50)
     
-    try:
-        df = pd.read_excel(file_path)
-        print(f"  📋 Excel结构: {df.shape[0]}行 x {df.shape[1]}列")
-        
-        columns = df.columns.tolist()
-        print(f"  📋 列名: {columns}")
-        
-        # 检测是否为标准格式
-        if '题目' in columns and 'A' in columns:
-            print("  ✅ 检测到结构化格式，使用列解析")
-            
-            for idx, row in df.iterrows():
-                if pd.isna(row.get('题目', '')):
-                    continue
-                
-                question = str(row['题目']).strip()
-                if not question:
-                    continue
-                
-                # 提取选项
-                options = []
-                for opt_col in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']:
-                    if opt_col in columns and not pd.isna(row.get(opt_col, '')):
-                        opt_text = str(row[opt_col]).strip()
-                        if opt_text and opt_text.lower() not in ['nan', 'none']:
-                            options.append(f"{opt_col}: {opt_text}")
-                
-                answer = str(row.get('答案', '')).strip()
-                excel_type = str(row.get('题型', '')).strip() if '题型' in columns else None
-                
-                if excel_type and excel_type.lower() in ['nan', 'none']:
-                    excel_type = None
-                
-                questions.append({
-                    'question': question,
-                    'options': options,
-                    'answer': answer,
-                    'excel_type': excel_type,
-                    'row_index': idx
-                })
-        else:
-            print("  ⚠️ 非结构化格式，使用文本解析")
-            # 尝试智能解析非标准格式
-            questions = parse_excel_file_unstructured(file_path)
-            
-    except Exception as e:
-        print(f"❌ Excel解析失败: {e}")
+    # 读取重构后的题目
+    with open(rebuilt_file, 'r', encoding='utf-8') as f:
+        questions = json.load(f)
     
-    return questions
+    print(f"📊 重构后题目数: {len(questions)}")
+    
+    all_results = []
+    
+    for i, q in enumerate(questions):
+        question_text = q['question']
+        options = q['options']
+        answer = q['answer']
+        
+        # 使用增强分类器识别
+        q_type, confidence = enhanced_question_classifier(question_text, options, answer)
+        
+        result = {
+            'source_id': f"rebuilt#q{i+1}",
+            'question': question_text,
+            'options': options,
+            'answer_raw': answer,
+            'predicted_type': q_type,
+            'confidence': confidence,
+            'method': 'enhanced_with_rebuilder',
+            'quality_score': q.get('quality_score', 0.0),
+            'source_rows': q.get('source_rows', ''),
+            'original_id': q.get('id', i+1)
+        }
+        
+        all_results.append(result)
+    
+    # 保存结果
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(all_results, f, ensure_ascii=False, indent=2)
+    
+    # 显示统计信息
+    print_statistics(all_results)
+    show_examples(all_results)
+    
+    return len(all_results)
 
-def parse_excel_file_unstructured(file_path: str) -> List[Dict[str, Any]]:
-    """解析非结构化Excel文件"""
-    questions = []
-    
-    try:
-        df = pd.read_excel(file_path)
-        columns = df.columns.tolist()
-        
-        # 查找可能的题目列
-        question_cols = []
-        for col in columns:
-            if any(keyword in str(col).lower() for keyword in ['题目', 'question', '题干', '问题']):
-                question_cols.append(col)
-        
-        # 查找可能的答案列
-        answer_cols = []
-        for col in columns:
-            if any(keyword in str(col).lower() for keyword in ['答案', 'answer', '正确答案']):
-                answer_cols.append(col)
-        
-        # 查找选项列
-        option_cols = []
-        for col in columns:
-            if any(keyword in str(col).lower() for keyword in ['选项', 'option']) or re.match(r'选项[A-L]', str(col)):
-                option_cols.append(col)
-        
-        if question_cols and answer_cols:
-            question_col = question_cols[0]
-            answer_col = answer_cols[0]
-            
-            for idx, row in df.iterrows():
-                if pd.isna(row.get(question_col, '')):
-                    continue
-                
-                question = str(row[question_col]).strip()
-                if not question or len(question) < 10:  # 过滤太短的内容
-                    continue
-                
-                answer = str(row.get(answer_col, '')).strip()
-                
-                # 提取选项
-                options = []
-                for opt_col in option_cols:
-                    if not pd.isna(row.get(opt_col, '')):
-                        opt_text = str(row[opt_col]).strip()
-                        if opt_text and opt_text.lower() not in ['nan', 'none'] and len(opt_text) > 1:
-                            options.append(opt_text)
-                
-                questions.append({
-                    'question': question,
-                    'options': options,
-                    'answer': answer,
-                    'excel_type': None,
-                    'row_index': idx
-                })
-        
-    except Exception as e:
-        print(f"❌ Excel文本解析失败: {e}")
-    
-    return questions
-
-def process_single_question(question_text: str, options: List[str], answer: str, excel_type: str = None) -> Dict[str, Any]:
-    """处理单个题目"""
-    clean_question = question_text.strip()
-    
-    if not clean_question:
-        return None
-    
-    # 使用增强分类器
-    question_type, confidence = enhanced_question_classifier(clean_question, options, answer, excel_type)
-    
-    return {
-        'question': clean_question,
-        'options': options,
-        'answer_raw': answer,
-        'predicted_type': question_type,
-        'confidence': confidence,
-        'method': 'enhanced_classifier',
-        'excel_type': excel_type
-    }
-
-def process_files(input_dir: str, output_file: str = "enhanced_results.json"):
-    """处理题库文件"""
-    print("🚀 题库识别系统 - 增强版 (100%识别率)")
+def process_files_with_rebuilder(input_dir: str, output_file: str = "final_rebuilt_results.json"):
+    """使用重构器处理文件"""
+    print("🚀 题库识别系统 - 集成智能重构器版本")
     print("=" * 60)
     
     # 查找题库文件
@@ -281,33 +186,43 @@ def process_files(input_dir: str, output_file: str = "enhanced_results.json"):
         print("❌ 未找到Excel文件")
         return 0
     
+    rebuilder = QuestionRebuilder()
     all_results = []
     
     for excel_file in excel_files:
-        print(f"📄 处理文件: {excel_file.name}")
+        print(f"\n📄 处理文件: {excel_file.name}")
         
-        # 解析Excel文件
-        questions = parse_excel_file_structured(excel_file)
-        
-        if not questions:
-            print(f"  ⚠️ 未能解析出题目")
-            continue
-        
-        print(f"  📊 识别到 {len(questions)} 个题目")
-        
-        # 处理每个题目
-        for i, q_data in enumerate(questions):
-            result = process_single_question(
-                q_data['question'], 
-                q_data['options'], 
-                q_data['answer'], 
-                q_data['excel_type']
-            )
+        # 使用重构器处理
+        try:
+            questions = rebuilder.process_excel_file(str(excel_file))
+            print(f"  ✅ 重构得到 {len(questions)} 个高质量题目")
             
-            if result:
-                result['source_id'] = f"file://{excel_file.name}#q{i+1}"
-                result['row_index'] = q_data['row_index']
+            # 对每个重构后的题目进行识别
+            for i, q in enumerate(questions):
+                question_text = q['question']
+                options = q['options']
+                answer = q['answer']
+                
+                # 使用增强分类器识别
+                q_type, confidence = enhanced_question_classifier(question_text, options, answer)
+                
+                result = {
+                    'source_id': f"file://{excel_file.name}#rebuilt_q{i+1}",
+                    'question': question_text,
+                    'options': options,
+                    'answer_raw': answer,
+                    'predicted_type': q_type,
+                    'confidence': confidence,
+                    'method': 'enhanced_with_rebuilder',
+                    'quality_score': q.get('quality_score', 0.0),
+                    'source_rows': q.get('source_rows', ''),
+                    'source_file': excel_file.name
+                }
+                
                 all_results.append(result)
+                
+        except Exception as e:
+            print(f"  ❌ 处理失败: {e}")
     
     # 保存结果
     with open(output_file, 'w', encoding='utf-8') as f:
@@ -315,8 +230,6 @@ def process_files(input_dir: str, output_file: str = "enhanced_results.json"):
     
     # 显示统计信息
     print_statistics(all_results)
-    
-    # 显示示例
     show_examples(all_results)
     
     return len(all_results)
@@ -350,6 +263,15 @@ def print_statistics(results: List[Dict]):
     print(f"  medium    : {medium_conf:4} 题 ({medium_conf/len(results)*100:5.1f}%)")
     print(f"  low       : {low_conf:4} 题 ({low_conf/len(results)*100:5.1f}%)")
     
+    # 质量分布
+    if 'quality_score' in results[0]:
+        quality_scores = [r['quality_score'] for r in results]
+        avg_quality = sum(quality_scores) / len(quality_scores)
+        high_quality = sum(1 for q in quality_scores if q >= 0.8)
+        print(f"\n🏆 质量分布:")
+        print(f"  平均质量分数: {avg_quality:.3f}")
+        print(f"  高质量题目: {high_quality:4} 题 ({high_quality/len(results)*100:5.1f}%)")
+    
     # 检查是否还有unknown
     unknown_count = type_counts.get('unknown', 0)
     if unknown_count == 0:
@@ -380,32 +302,36 @@ def show_examples(results: List[Dict]):
         
         # 显示前2个示例
         for i, result in enumerate(questions[:2], 1):
-            print(f"    示例{i} (置信度: {result['confidence']:.2f}):")
+            print(f"    示例{i} (置信度: {result['confidence']:.2f}, 质量: {result.get('quality_score', 0):.2f}):")
             print(f"      题干: {result['question'][:80]}...")
             if result['options']:
-                print(f"      选项: {'; '.join(result['options'][:2])}...")
+                print(f"      选项: {len(result['options'])}个")
             print(f"      答案: {result['answer_raw']}")
-            if result.get('excel_type'):
-                print(f"      Excel标记: {result['excel_type']}")
             print()
 
 def main():
     """主函数"""
-    parser = argparse.ArgumentParser(description='题库识别系统 - 增强版 (100%识别率)')
+    parser = argparse.ArgumentParser(description='题库识别系统 - 集成智能重构器版本')
     parser.add_argument('--input', '-i', default='../题库', help='题库目录路径')
-    parser.add_argument('--output', '-o', default='enhanced_results.json', help='输出文件路径')
-    parser.add_argument('--version', '-v', action='version', version='题库识别系统 v3.0-enhanced')
+    parser.add_argument('--output', '-o', default='final_rebuilt_results.json', help='输出文件路径')
+    parser.add_argument('--use-rebuilt', action='store_true', help='使用已重构的数据')
+    parser.add_argument('--version', '-v', action='version', version='题库识别系统 v4.0-rebuilder')
     
     args = parser.parse_args()
     
     try:
-        total = process_files(args.input, args.output)
+        if args.use_rebuilt and Path('rebuilt_questions.json').exists():
+            # 使用已重构的数据
+            total = process_rebuilt_questions('rebuilt_questions.json', args.output)
+        else:
+            # 重新重构并处理
+            total = process_files_with_rebuilder(args.input, args.output)
         
         if total > 0:
             print("\n🎉 处理完成！")
             print(f"📊 成功识别 {total} 个题目")
             print(f"📋 详细结果请查看: {args.output}")
-            print(f"✅ 增强版识别系统支持100%识别率，无unknown题目")
+            print(f"✅ 集成重构器版本支持智能题目重构和100%识别率")
         else:
             print("\n❌ 未处理任何题目，请检查输入目录和文件格式")
             
@@ -414,6 +340,8 @@ def main():
         sys.exit(1)
     except Exception as e:
         print(f"\n❌ 系统错误: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":

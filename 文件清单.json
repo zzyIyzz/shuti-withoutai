@@ -1,0 +1,82 @@
+{
+  "core_system": {
+    "description": "核心刷题系统文件",
+    "files": [
+      ".gitignore",
+      "GUI刷题程序.py",
+      "main.py",
+      "requirements.txt",
+      "刷题引擎.py",
+      "双系统题型识别器.py",
+      "启动器.py",
+      "智能题型识别.py",
+      "用户设置.py",
+      "统计分析.py",
+      "运行.bat",
+      "运行GUI.bat",
+      "错题记忆.py",
+      "题库管理.py",
+      "高精度题型识别.py"
+    ]
+  },
+  "recognition_system": {
+    "description": "题型识别系统文件",
+    "files": [
+      "question-recog\\main.py",
+      "question-recog\\README.md",
+      "question-recog\\requirements.txt",
+      "question-recog\\train_model.py",
+      "question-recog\\智能题目重构器.py",
+      "question-recog\\configs\\app.yaml",
+      "question-recog\\configs\\features.yaml",
+      "question-recog\\configs\\logging.yaml",
+      "question-recog\\configs\\rules.yaml",
+      "question-recog\\src\\app.py",
+      "question-recog\\src\\pipeline.py",
+      "question-recog\\src\\__init__.py",
+      "question-recog\\tools\\calibrate_model.py",
+      "question-recog\\tools\\test_trained_model.py",
+      "question-recog\\tools\\train_improved_model.py",
+      "question-recog\\题库\\1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011).pdf",
+      "question-recog\\题库\\1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011).xlsx",
+      "question-recog\\题库\\新员工一级竞赛题库.xlsx",
+      "question-recog\\题库\\附件：安徽分公司电力生产培训题库(1).docx",
+      "question-recog\\tools\\__pycache__\\test_trained_model.cpython-313.pyc",
+      "question-recog\\src\\calibrator\\isotonic.py",
+      "question-recog\\src\\calibrator\\__init__.py",
+      "question-recog\\src\\evaluation\\metrics.py",
+      "question-recog\\src\\features\\extractor.py",
+      "question-recog\\src\\features\\__init__.py",
+      "question-recog\\src\\io\\readers.py",
+      "question-recog\\src\\io\\schemas.py",
+      "question-recog\\src\\io\\__init__.py",
+      "question-recog\\src\\model\\feature_names.json",
+      "question-recog\\src\\model\\label_encoder.pkl",
+      "question-recog\\src\\model\\training_info.json",
+      "question-recog\\src\\model\\xgb_model.json",
+      "question-recog\\src\\parsing\\layout_state_machine.py",
+      "question-recog\\src\\parsing\\__init__.py",
+      "question-recog\\src\\rules\\engine.py",
+      "question-recog\\src\\rules\\__init__.py",
+      "question-recog\\data\\interim\\README.md",
+      "question-recog\\data\\labels\\README.md",
+      "question-recog\\data\\processed\\README.md",
+      "question-recog\\data\\raw\\README.md"
+    ]
+  },
+  "data_files": {
+    "description": "数据和配置文件",
+    "files": [
+      "题库\\1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011).pdf",
+      "题库\\1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011).xlsx",
+      "题库\\新员工一级竞赛题库.xlsx",
+      "题库\\附件：安徽分公司电力生产培训题库(1).docx"
+    ]
+  },
+  "documentation": {
+    "description": "文档文件",
+    "files": [
+      "README.md"
+    ]
+  }
+}

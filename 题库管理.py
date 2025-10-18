@@ -9,8 +9,7 @@ import os
 import json
 import openpyxl
 from pathlib import Path
-from Word题库解析 import WordTikuParser
-from PDF题库解析 import PDFTikuParser
+import pandas as pd
 
 class TikuManager:
     def __init__(self):
@@ -239,45 +238,25 @@ class TikuManager:
             return []
     
     def parse_word(self, word_file):
-        """解析Word题库"""
+        """解析Word题库（简化版）"""
         try:
-            print(f"正在智能解析Word题库: {word_file.name}")
-            
-            # 使用智能解析器
-            from Word题库智能解析器 import Word题库智能解析器
-            智能解析器 = Word题库智能解析器(word_file)
-            questions = 智能解析器.parse()
-            
-            if questions:
-                print(f"成功加载 {len(questions)} 道题目")
-            else:
-                print("未能从Word文档中解析到题目")
-            
-            return questions
+            print(f"正在解析Word题库: {word_file.name}")
+            print("⚠️ Word解析功能暂不可用，请将Word文档转换为Excel格式")
+            print("建议: 将Word文档内容复制到Excel中，按标准格式整理")
+            return []
         except Exception as e:
             print(f"解析Word文件失败: {e}")
-            print("提示: 请确保已安装 python-docx 库")
-            print("运行: pip install python-docx")
             return []
     
     def parse_pdf(self, pdf_file):
-        """解析PDF题库"""
+        """解析PDF题库（简化版）"""
         try:
             print(f"正在解析PDF题库: {pdf_file.name}")
-            parser = PDFTikuParser(pdf_file)
-            questions = parser.parse()
-            
-            if questions:
-                print(f"成功加载 {len(questions)} 道题目")
-            else:
-                print("未能从PDF文档中解析到题目")
-                print("提示: PDF格式复杂，建议使用'PDF转Excel.bat'转换后使用")
-            
-            return questions
+            print("⚠️ PDF解析功能暂不可用，请将PDF转换为Excel格式")
+            print("建议: 使用PDF转换工具将内容转换为Excel格式")
+            return []
         except Exception as e:
             print(f"解析PDF文件失败: {e}")
-            print("提示: 请确保已安装 pdfplumber 库")
-            print("运行: pip install pdfplumber")
             return []
     
     def identify_columns(self, headers):
@@ -678,4 +657,55 @@ class TikuManager:
                 json.dump(self.tiku_cache, f, ensure_ascii=False, indent=2)
         except:
             pass
+    
+    def load_questions_from_excel(self, excel_path):
+        """简化的Excel加载方法，用于测试"""
+        try:
+            df = pd.read_excel(excel_path)
+            questions = []
+            
+            # 简单的列映射
+            question_col = None
+            answer_col = None
+            
+            # 查找题目列
+            for col in df.columns:
+                if '题目' in str(col):
+                    question_col = col
+                    break
+            
+            # 查找答案列
+            for col in df.columns:
+                if '答案' in str(col):
+                    answer_col = col
+                    break
+            
+            if question_col is None or answer_col is None:
+                print("未找到题目或答案列")
+                return []
+            
+            # 解析题目
+            for idx, row in df.iterrows():
+                if pd.notna(row[question_col]) and pd.notna(row[answer_col]):
+                    question = {
+                        'id': idx + 1,
+                        'question': str(row[question_col]).strip(),
+                        'answer': str(row[answer_col]).strip(),
+                        'options': {},
+                        'type': 'unknown'
+                    }
+                    
+                    # 查找选项
+                    for col in df.columns:
+                        if '选项' in str(col) and pd.notna(row[col]):
+                            option_key = str(col).replace('选项', '').replace('（必填）', '').strip()
+                            question['options'][option_key] = str(row[col]).strip()
+                    
+                    questions.append(question)
+            
+            return questions
+            
+        except Exception as e:
+            print(f"加载Excel失败: {e}")
+            return []
 
