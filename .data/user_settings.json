@@ -1,7 +1,7 @@
 {
-  "window_size": "1920x1117+436+167",
+  "window_size": "1200x800",
   "window_position": null,
-  "last_tiku": "1.电力安全工作规程（发电厂和变电站电气部分）安徽分公司题库（GB 26860—2011)",
+  "last_tiku": null,
   "last_mode": "顺序",
   "auto_save_progress": true,
   "show_hints": true,
@@ -10,8 +10,5 @@
   "theme": "modern_tech",
   "font_size": 12,
   "language": "zh_CN",
-  "current_theme": "light",
-  "daily_progress_2025-10-10": 2,
-  "daily_goal": 50,
-  "已显示新手引导": true
+  "current_theme": "light"
 }

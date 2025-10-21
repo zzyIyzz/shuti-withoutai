@@ -105,7 +105,7 @@ class TikuManager:
         elif file_path.suffix.lower() == '.docx':
             questions = self.parse_word(file_path)
         elif file_path.suffix.lower() == '.pdf':
-            questions = self.parse_pdf(file_path)
+            questions = self.parse_pdf_improved(file_path)
         
         if not questions:
             return None
@@ -295,6 +295,37 @@ class TikuManager:
             print("运行: pip install pdfplumber")
             return []
     
+    def parse_pdf_improved(self, pdf_file):
+        """使用原始PDF解析方法"""
+        try:
+            print(f"正在解析PDF题库: {pdf_file.name}")
+            
+            # 使用原始的PDF解析器
+            from PDF题库解析 import PDFTikuParser
+            
+            parser = PDFTikuParser(str(pdf_file))
+            questions = parser.parse()
+            
+            if questions:
+                print(f"成功加载 {len(questions)} 道题目")
+                
+                # 对每个题目进行题型识别
+                for i, question in enumerate(questions):
+                    question['id'] = i + 1
+                    question['type'] = self.detect_question_type(question)
+                
+                return questions
+            else:
+                print("未能从PDF文档中解析到题目")
+                print("提示: PDF格式复杂，建议使用Excel格式或手动整理")
+                return []
+                
+        except Exception as e:
+            print(f"解析PDF文件失败: {e}")
+            print("提示: 请确保已安装 pdfplumber 或 PyPDF2 库")
+            print("运行: pip install pdfplumber")
+            return []
+    
     def identify_columns(self, headers):
         """智能识别列（支持多种格式）"""
         col_map = {}
@@ -424,29 +455,19 @@ class TikuManager:
             return 选项内容
     
     def detect_question_type(self, question):
-        """自动检测题型 - 使用高精度识别引擎"""
+        """自动检测题型 - 使用原始识别方法"""
         try:
-            # 优先使用修复后的高精度识别
-            from 高精度题型识别 import detect_question_type_fixed
-            return detect_question_type_fixed(
+            # 使用原始的题型识别方法
+            from 智能题型识别 import detect_question_type
+            return detect_question_type(
                 question['question'],
                 question['answer'],
                 question.get('options')
             )
         except Exception as e:
-            print(f"高精度识别失败，使用智能识别: {e}")
-            try:
-                # 备用方案1: 使用原有智能识别
-                from 智能题型识别 import detect_question_type
-                return detect_question_type(
-                    question['question'],
-                    question['answer'],
-                    question.get('options')
-                )
-            except Exception as e2:
-                print(f"智能识别失败，使用备用方法: {e2}")
-                # 备用方案2: 使用内置识别方法
-                return self._fallback_detect(question)
+            print(f"题型识别失败，使用备用方法: {e}")
+            # 备用方案: 使用内置识别方法
+            return self._fallback_detect(question)
     
     def _fallback_detect(self, question):
         """备用题型识别方法 - 详细完备版"""
